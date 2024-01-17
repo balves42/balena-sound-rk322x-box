@@ -1,4 +1,4 @@
-FROM bh.cr/balenalabs/bluetooth-%%BALENA_ARCH%%
+FROM bh.cr/balenalabs/bluetooth-armv7hf:latest
 
 WORKDIR /usr/src
 

@@ -16,9 +16,9 @@ services:
       - 4317:4317
 
   sound-supervisor:
-    build:
-      context: .
-      dockerfile: ./core/sound-supervisor/Dockerfile.template
+    build: ./core/sound-supervisor
+#      context: .
+#      dockerfile: ./core/sound-supervisor/Dockerfile.template
     network_mode: host
     labels:
       io.balena.features.balena-api: "1"
@@ -41,12 +41,16 @@ services:
   # -- Remove unwanted plugins as needed
   bluetooth:
     build: ./plugins/bluetooth
+    tty: true
     restart: on-failure
     network_mode: host
+    volumes:
+      - /run/dbus:/host/run/dbus
     cap_add:
+      - SYS_ADMIN
       - NET_ADMIN
-    labels:
-      io.balena.features.dbus: 1
+#    labels:
+#      io.balena.features.dbus: 1
 
   airplay:
     build: ./plugins/airplay
